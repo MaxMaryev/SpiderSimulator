@@ -5961,8 +5961,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveRepeatDelay: 0.06
-  m_MoveRepeatRate: 0.06
+  m_MoveRepeatDelay: 0.05
+  m_MoveRepeatRate: 0
   m_ActionsAsset: {fileID: -944628639613478452, guid: 0bca9085a847672449e0c594360e337b, type: 3}
   m_PointAction: {fileID: 1054132383583890850, guid: 0bca9085a847672449e0c594360e337b, type: 3}
   m_MoveAction: {fileID: -8703182089648036320, guid: 0bca9085a847672449e0c594360e337b, type: 3}
@@ -7582,6 +7582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _butterflyPrefab: {fileID: 6468694258300817763, guid: 50741c4a6b45cea47a645f6249094660, type: 3}
+  _game: {fileID: 1280098668}
   _minSpawnDelay: 10
   _maxSpawnDelay: 40
   _webCenter: {fileID: 1765328023}
@@ -11971,10 +11972,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider2.0
       objectReference: {fileID: 0}
-    - target: {fileID: 5935411998378944006, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6419038422090366140, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -12019,14 +12016,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6818370748432948723, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6818370748685896152, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6818370748790471793, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
       propertyPath: _leftSlider
       value: 
@@ -12035,10 +12024,6 @@ PrefabInstance:
       propertyPath: _rightSlider
       value: 
       objectReference: {fileID: 502547980}
-    - target: {fileID: 6818370748790471794, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6818370748790471803, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
       propertyPath: _moveButtons.Array.data[0]
       value: 
@@ -12071,6 +12056,5 @@ PrefabInstance:
       propertyPath: _moveButtons.Array.data[7]
       value: 
       objectReference: {fileID: 947088858}
-    m_RemovedComponents:
-    - {fileID: 6818370749627638115, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ffd018cb15477d41a900c492b08b860, type: 3}

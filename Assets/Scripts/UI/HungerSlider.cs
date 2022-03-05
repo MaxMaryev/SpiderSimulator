@@ -11,6 +11,9 @@ public class HungerSlider : MonoBehaviour
 
     private Slider _slider;
     private Color _startColor;
+    private Coroutine _sliderValue;
+    private Coroutine _sliderColor;
+    private float _updatingDelay = 0.4f;
 
     private void Awake()
     {
@@ -20,10 +23,37 @@ public class HungerSlider : MonoBehaviour
         _startColor = _fill.color;
     }
 
-    private void Update()
+    private void Start()
     {
-        float normilizedFloat = (_slider.maxValue - _slider.value) / _slider.maxValue;
-        _fill.color = Color.Lerp(_startColor, Color.red, normilizedFloat);
-        _slider.value = _spider.Hunger;
+        _sliderValue = StartCoroutine(UpdatingSliderValue());
+        _sliderColor = StartCoroutine(UdpatingSliderColor());
+    }
+
+    private void OnDisable()
+    {
+        if (_sliderValue != null)
+            StopCoroutine(_sliderValue);
+
+        if (_sliderColor != null)
+            StopCoroutine(_sliderColor);
+    }
+
+    private IEnumerator UpdatingSliderValue()
+    {
+        while (_slider.value != 0)
+        {
+            _slider.value = _spider.Hunger;
+            yield return new WaitForSeconds(_updatingDelay);
+        }
+    }
+
+    private IEnumerator UdpatingSliderColor()
+    {
+        while (_slider.value != 0)
+        {
+            float normilizedFloat = (_slider.maxValue - _slider.value) / _slider.maxValue;
+            _fill.color = Color.Lerp(_startColor, Color.red, normilizedFloat);
+            yield return new WaitForSeconds(_updatingDelay);
+        }
     }
 }

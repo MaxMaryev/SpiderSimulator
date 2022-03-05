@@ -4,6 +4,7 @@ using UnityEngine;
 public class VictimSpawner : MonoBehaviour
 {
     [SerializeField] private ButterFly _butterflyPrefab;
+    [SerializeField] private GameOver _game;
     [SerializeField] private float _minSpawnDelay;
     [SerializeField] private float _maxSpawnDelay;
     [SerializeField] private Transform _webCenter;
@@ -28,14 +29,13 @@ public class VictimSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        StopCoroutine(_spawnCoroutine);
+        if (_spawnCoroutine != null)
+            StopCoroutine(_spawnCoroutine);
     }
 
     private IEnumerator Spawn()
     {
-        bool isGameOver = false;
-
-        while (!isGameOver)
+        while (!_game.IsGameOver)
         {
             Instantiate(_butterflyPrefab, new Vector3(Random.Range(_xMinPosition, _xMaxPosition), Random.Range(_yMinPosition, _yMaxPosition), _zPosition), _butterflyPrefab.transform.rotation);
             float delay = Random.Range(_minSpawnDelay, _maxSpawnDelay);

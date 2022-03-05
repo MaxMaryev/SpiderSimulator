@@ -903,12 +903,12 @@ GameObject:
   - component: {fileID: 6419038422090366140}
   - component: {fileID: 1149875565092300486}
   - component: {fileID: 6818370748790471806}
-  - component: {fileID: 6818370748790471805}
   - component: {fileID: 6818370748790471803}
   - component: {fileID: 6818370748790471804}
   - component: {fileID: 6818370748790471793}
   - component: {fileID: 6818370748790471794}
   - component: {fileID: 260921862183838953}
+  - component: {fileID: 6764078378869402278}
   m_Layer: 2
   m_Name: Spider2.0
   m_TagString: Untagged
@@ -969,19 +969,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6818370748790471805
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5935411998378944006}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.630876, y: 1.9516976, z: 5.8377943}
-  m_Center: {x: -0.013218164, y: 0.9781333, z: -0.013217807}
 --- !u!114 &6818370748790471803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,7 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b67af61ba7681f4d9efb549ac6ffe56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 0.1
+  _rotationSpeed: 0.12
   _moveSpeed: 0.007
   _stickForce: 2
   _groundChecker: {fileID: 6818370748790471804}
@@ -1047,10 +1034,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86db9f0865b20234bba046b4223fdc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hunger: 100
-  _hungerSpeed: 0.5
   _mouth: {fileID: 1483890497}
   _eatSound: {fileID: 8300000, guid: 5f2aec1ea0729034aa35d11c338e144b, type: 3}
+  _hunger: 100
+  _hungerSpeed: 0.5
   _growStep: 1.1
   _speedRaise: 0.75
 --- !u!82 &260921862183838953
@@ -1149,6 +1136,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &6764078378869402278
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5935411998378944006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.6
+  m_Height: 5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5, z: 0.2}
 --- !u!1 &6407799446787715041
 GameObject:
   m_ObjectHideFlags: 0

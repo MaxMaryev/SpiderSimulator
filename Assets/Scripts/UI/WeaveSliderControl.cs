@@ -16,10 +16,10 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
     private Coroutine _setDelta;
     private Coroutine _playSound;
     private float _previousSliderValue;
-    private float _delta;
     private bool _isWearing;
+    private float _deltaMeasuringDelay = 0.2f;
 
-    public float Delta => _delta;
+    public float Delta { get; private set; }
 
     private void Awake()
     {
@@ -35,6 +35,7 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _isWearing = true;
         _setDelta = StartCoroutine(SetDelta());
         _playSound = StartCoroutine(PlaySound());
     }
@@ -42,26 +43,30 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eventData)
     {
         _isWearing = false;
-
-        StopCoroutine(_setDelta);
-        StopCoroutine(_playSound);
     }
 
+    private void OnDisable()
+    {
+        if (_setDelta != null)
+            StopCoroutine(_setDelta);
+
+        if (_playSound != null)
+            StopCoroutine(_playSound);
+    }
     private IEnumerator SetDelta()
     {
-        bool isDragging = true;
-
-        while (isDragging)
+        while (_isWearing)
         {
             _previousSliderValue = _slider.value;
-            yield return new WaitForSeconds(Time.deltaTime);
-            _delta = Mathf.Abs(_previousSliderValue - _slider.value);
+            yield return new WaitForSeconds(_deltaMeasuringDelay);
+            Delta = Mathf.Abs(_previousSliderValue - _slider.value);
         }
+
+        Delta = 0;
     }
 
     private IEnumerator PlaySound()
     {
-        _isWearing = true;
         float delayBetweenPlays = 0.6f;
 
         while (_isWearing)

@@ -15,6 +15,8 @@ public class GameOver : MonoBehaviour
     private Color _defaultColor;
     private AudioSource _audioSource;
 
+    public bool IsGameOver { get; private set; }
+
     private void Awake()
     {
         _endColor = new Color(0, 0, 0, 1);
@@ -36,10 +38,11 @@ public class GameOver : MonoBehaviour
     {
         bool isEndEffectShowed = false;
 
+        IsGameOver = true;
+
         _audioSource.Stop();
 
         StartCoroutine(ShowEndEffect());
-
         StartCoroutine(Quit());
 
         IEnumerator ShowEndEffect()
