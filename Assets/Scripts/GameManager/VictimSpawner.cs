@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VictimSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject _victimPrefab;
+    [SerializeField] private ButterFly _butterflyPrefab;
     [SerializeField] private float _minSpawnDelay;
     [SerializeField] private float _maxSpawnDelay;
     [SerializeField] private Transform _webCenter;
@@ -37,7 +37,7 @@ public class VictimSpawner : MonoBehaviour
 
         while (!isGameOver)
         {
-            Instantiate(_victimPrefab, new Vector3(Random.Range(_xMinPosition, _xMaxPosition), Random.Range(_yMinPosition, _yMaxPosition), _zPosition), _victimPrefab.transform.rotation);
+            Instantiate(_butterflyPrefab, new Vector3(Random.Range(_xMinPosition, _xMaxPosition), Random.Range(_yMinPosition, _yMaxPosition), _zPosition), _butterflyPrefab.transform.rotation);
             float delay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
             yield return new WaitForSeconds(delay);
         }

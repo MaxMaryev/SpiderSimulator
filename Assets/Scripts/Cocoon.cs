@@ -6,7 +6,6 @@ public class Cocoon : MonoBehaviour
 {
     [SerializeField] private int _nutrition = 100;
 
-    private Transform _transform;
     private Sequence _sequence;
     private CapsuleCollider _collider;
     private float _defaultColliderRadius;
@@ -18,7 +17,6 @@ public class Cocoon : MonoBehaviour
     private void Awake()
     {
         _collider = GetComponent<CapsuleCollider>();
-        _transform = GetComponent<Transform>();
         _sequence = DOTween.Sequence();
         _defaultColliderRadius = _collider.radius;
     }
@@ -30,12 +28,12 @@ public class Cocoon : MonoBehaviour
         float changeScaleSpeed = 0.3f;
         int loopsNumber = 5;
 
-        _sequence.Append(_transform.DOScaleX(_transform.localScale.x + scaleIncrease, changeScaleSpeed));
-        _sequence.Append(_transform.DOScaleX(_transform.localScale.x, changeScaleSpeed));
-        _sequence.Append(_transform.DOScaleZ(_transform.localScale.z + scaleIncrease, changeScaleSpeed));
-        _sequence.Append(_transform.DOScaleZ(_transform.localScale.z, changeScaleSpeed));
-        _sequence.Append(_transform.DOScaleY(_transform.localScale.y + yScaleIncrease, changeScaleSpeed));
-        _sequence.Append(_transform.DOScaleY(_transform.localScale.y, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleX(transform.localScale.x + scaleIncrease, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleX(transform.localScale.x, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleZ(transform.localScale.z + scaleIncrease, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleZ(transform.localScale.z, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleY(transform.localScale.y + yScaleIncrease, changeScaleSpeed));
+        _sequence.Append(transform.DOScaleY(transform.localScale.y, changeScaleSpeed));
         _sequence.SetLoops(loopsNumber, LoopType.Yoyo).OnKill(() => _isMoving = false);
     }
 
@@ -43,8 +41,8 @@ public class Cocoon : MonoBehaviour
     {
         float duration = 1;
 
-        _transform.DOScale(0, duration);
-        _transform.DOMove(mouth, duration);
+        transform.DOScale(0, duration);
+        transform.DOMove(mouth, duration);
 
         yield return new WaitForSeconds(duration);
 

@@ -14,7 +14,6 @@ public class SpiderMover : MonoBehaviour
     private Animator _animator;
     private Rigidbody _rigidbody;
     private Spider _spider;
-    private Transform _transform;
 
     private string _right = "Right";
     private string[] _legPairs = new string[4] { "_1", "_2", "_3", "_4" };
@@ -27,7 +26,6 @@ public class SpiderMover : MonoBehaviour
         _spider = GetComponent<Spider>();
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        _transform = GetComponent<Transform>();
 
         foreach (var moveButton in _moveButtons)
         {
@@ -75,7 +73,7 @@ public class SpiderMover : MonoBehaviour
     private void Stick()
     {
         _rigidbody.useGravity = false;
-        _rigidbody.velocity = -transform.up * _stickForce;
+        _rigidbody.velocity = -base.transform.up * _stickForce;
     }
 
     private IEnumerator Rotate(string leg)
@@ -88,7 +86,7 @@ public class SpiderMover : MonoBehaviour
 
         for (int i = 0; i < iterationsCount; i++)
         {
-            _transform.Rotate(Vector3.up, _rotationSpeed * turningSide, Space.Self);
+            transform.Rotate(Vector3.up, _rotationSpeed * turningSide, Space.Self);
             yield return null;
         }
     }
@@ -99,7 +97,7 @@ public class SpiderMover : MonoBehaviour
 
         for (int i = 0; i < iterationsCount; i++)
         {
-            _transform.Translate(Vector3.forward * _moveSpeed, Space.Self);
+            transform.Translate(Vector3.forward * _moveSpeed, Space.Self);
             yield return null;
         }
     }

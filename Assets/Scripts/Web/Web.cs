@@ -12,7 +12,6 @@ public class Web : MonoBehaviour
     [SerializeField] private float _timeWindowForVictimEscape = 0.7f;
 
     private Rigidbody _rigidbody;
-    private Transform _transform;
     private Coroutine _stickVictim;
     private RaycastHit hitForward;
     private RaycastHit hitBack;
@@ -31,32 +30,31 @@ public class Web : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _transform = GetComponent<Transform>();
 
-        if (Physics.Raycast(_transform.position, _transform.forward, out hitForward, _rayDistanse))
+        if (Physics.Raycast(transform.position, transform.forward, out hitForward, _rayDistanse))
             _forwardSphere = hitForward.transform.position;
 
-        if (Physics.Raycast(_transform.position, -_transform.forward, out hitBack, _rayDistanse))
+        if (Physics.Raycast(transform.position, -transform.forward, out hitBack, _rayDistanse))
             _backSphere = hitBack.transform.position;
 
-        if (Physics.Raycast(_transform.position, _transform.right, out hitRight, _rayDistanse))
+        if (Physics.Raycast(transform.position, transform.right, out hitRight, _rayDistanse))
             _rightSphere = hitRight.transform.position;
 
-        if (Physics.Raycast(_transform.position, -_transform.right, out hitLeft, _rayDistanse))
+        if (Physics.Raycast(transform.position, -transform.right, out hitLeft, _rayDistanse))
             _leftSphere = hitLeft.transform.position;
     }
 
     private void Update()
     {
-        _rigidbody.AddForce((_transform.position - _forwardSphere).normalized * -_forceUp);
-        _rigidbody.AddForce((_transform.position - _backSphere).normalized * -_forceDown);
-        _rigidbody.AddForce((_transform.position - _rightSphere).normalized * -_forceRight);
-        _rigidbody.AddForce((_transform.position - _leftSphere).normalized * -_forceLeft);
+        _rigidbody.AddForce((transform.position - _forwardSphere).normalized * -_forceUp);
+        _rigidbody.AddForce((transform.position - _backSphere).normalized * -_forceDown);
+        _rigidbody.AddForce((transform.position - _rightSphere).normalized * -_forceRight);
+        _rigidbody.AddForce((transform.position - _leftSphere).normalized * -_forceLeft);
 
-        _forceUp = Vector3.Distance(_transform.position, hitForward.point) * _forceValue;
-        _forceDown = Vector3.Distance(_transform.position, hitBack.point) * _forceValue;
-        _forceRight = Vector3.Distance(_transform.position, hitForward.point) * _forceValue;
-        _forceLeft = Vector3.Distance(_transform.position, hitBack.point) * _forceValue;
+        _forceUp = Vector3.Distance(transform.position, hitForward.point) * _forceValue;
+        _forceDown = Vector3.Distance(transform.position, hitBack.point) * _forceValue;
+        _forceRight = Vector3.Distance(transform.position, hitForward.point) * _forceValue;
+        _forceLeft = Vector3.Distance(transform.position, hitBack.point) * _forceValue;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -73,8 +71,7 @@ public class Web : MonoBehaviour
     private IEnumerator TryStickVictim(GameObject victim)
     {
         _isCatched = true;
-        gameObject.AddComponent<HingeJoint>();
-        GetComponent<HingeJoint>().connectedBody = victim.GetComponent<Rigidbody>();
+        gameObject.AddComponent<HingeJoint>().connectedBody = victim.GetComponent<Rigidbody>();
 
         yield return new WaitForSeconds(_stickTime);
 

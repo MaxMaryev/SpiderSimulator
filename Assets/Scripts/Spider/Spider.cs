@@ -5,12 +5,12 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
 public class Spider : MonoBehaviour
 {
-    public UnityAction GameOver;
+    public UnityAction GameOverEvent;
 
-    [SerializeField] private float _hunger = 100;
-    [SerializeField] private float _hungerSpeed = 1;
     [SerializeField] private Transform _mouth;
     [SerializeField] private AudioClip _eatSound;
+    [SerializeField] private float _hunger = 100;
+    [SerializeField] private float _hungerSpeed = 1;
     [SerializeField] private float _growStep = 1.1f;
     [SerializeField] private float _speedRaise = 0.75f;
 
@@ -51,7 +51,7 @@ public class Spider : MonoBehaviour
         if (other.TryGetComponent<Cocoon>(out Cocoon cocoon) && !cocoon.IsMoving && _isEating == false)
         {
             Eat(cocoon);
-            StartCoroutine(SetIsEatingFalse(other));
+            StartCoroutine(StopEating(other));
             Grow();
         }
     }
@@ -70,7 +70,7 @@ public class Spider : MonoBehaviour
             _hunger = maxValue;
     }
 
-    private IEnumerator SetIsEatingFalse(Collider cocoon)
+    private IEnumerator StopEating(Collider cocoon)
     {
         yield return new WaitUntil(() => cocoon == null);
         _isEating = false;
@@ -85,6 +85,6 @@ public class Spider : MonoBehaviour
     private void Die()
     {
         _isAlive = false;
-        GameOver?.Invoke();
+        GameOverEvent?.Invoke();
     }
 }

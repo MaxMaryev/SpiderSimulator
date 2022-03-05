@@ -24,7 +24,6 @@ public class SpiderWeaver : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
         if (other.TryGetComponent<ButterFly>(out ButterFly butterFly))
         {
             _web += _leftSlider.Delta + _rightSlider.Delta;

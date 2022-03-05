@@ -9,7 +9,6 @@ public class ButterFly : MonoBehaviour
     [SerializeField] private GameObject _cocoonPrefab;
 
     private Rigidbody _rigidbody;
-    private Transform _transform;
     private float _cocoonStage;
 
     public float CocoonStage => _cocoonStage;
@@ -17,7 +16,6 @@ public class ButterFly : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _transform = GetComponent<Transform>();
         _rigidbody.AddForce(Vector3.forward * _force, ForceMode.Impulse);
     }
 
@@ -39,7 +37,7 @@ public class ButterFly : MonoBehaviour
 
         if (spiderWeb >= _requaredWebForCocoon)
         {
-            Instantiate(_cocoonPrefab, _transform.position, Quaternion.identity);
+            Instantiate(_cocoonPrefab, transform.position, Quaternion.identity);
             StartCoroutine(Destroy());
         }
     }

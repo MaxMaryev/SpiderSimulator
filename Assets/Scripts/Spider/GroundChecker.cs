@@ -6,34 +6,24 @@ public class GroundChecker : MonoBehaviour
     [SerializeField] private float _rayDistance;
     [SerializeField] private float _rayCircleRadius;
 
-    private Transform _transform;
-    private bool _isGrounded;
     private Vector3[] _points = new Vector3[6];
     private RaycastHit[] _hits = new RaycastHit[6];
 
-    public bool IsGrounded => _isGrounded;
-
-    private void Awake()
-    {
-        _transform = GetComponent<Transform>();
-    }
+    public bool IsGrounded { get; private set; }
 
     private void Update()
     {
-        CheckByRaycasts();
+        EmitRaycasts();
 
         SetGroundedState();
     }
 
     private void SetGroundedState()
     {
-        if (_hits.Any(hit => hit.collider != null))
-            _isGrounded = true;
-        else
-            _isGrounded = false;
+        IsGrounded = _hits.Any(hit => hit.collider != null);
     }
 
-    private void CheckByRaycasts()
+    private void EmitRaycasts()
     {
         for (int i = 0; i < _points.Length; i++)
         {
@@ -41,10 +31,10 @@ public class GroundChecker : MonoBehaviour
             float y = 0;
             float z = _rayCircleRadius * Mathf.Sin(((float)i + 1 / _points.Length));
 
-            _points[i] = _transform.position + _transform.InverseTransformDirection(new Vector3(x, y, z));
+            _points[i] = transform.position + transform.InverseTransformDirection(new Vector3(x, y, z));
 
             //Debug.DrawRay(_points[i], -transform.up * _rayDistance, Color.red);
-            Physics.Raycast(_points[i], -_transform.up, out _hits[i], _rayDistance);
+            Physics.Raycast(_points[i], -transform.up, out _hits[i], _rayDistance);
         }
     }
 }

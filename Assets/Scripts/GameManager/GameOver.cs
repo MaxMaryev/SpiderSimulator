@@ -24,12 +24,12 @@ public class GameOver : MonoBehaviour
 
     private void OnEnable()
     {
-        _spider.GameOver += EndGame;
+        _spider.GameOverEvent += EndGame;
     }
 
     private void OnDisable()
     {
-        _spider.GameOver -= EndGame;
+        _spider.GameOverEvent -= EndGame;
     }
 
     private void EndGame()
