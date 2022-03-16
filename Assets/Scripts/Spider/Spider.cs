@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Spider : MonoBehaviour
 {
     public UnityAction GameOverEvent;
+    public UnityAction<float> GrowEvent;
 
     [SerializeField] private Transform _mouth;
     [SerializeField] private AudioClip _eatSound;
@@ -78,6 +79,8 @@ public class Spider : MonoBehaviour
 
     private void Grow()
     {
+        GrowEvent?.Invoke(_growStep);
+
         transform.localScale *= _growStep;
         _hungerSpeed += _speedRaise;
     }

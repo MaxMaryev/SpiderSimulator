@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq;
 using DG.Tweening;
 
 public class Cocoon : MonoBehaviour
@@ -59,11 +58,10 @@ public class Cocoon : MonoBehaviour
     {
         RaycastHit[] hits = new RaycastHit[6];
         EmitRaycasts();
-        bool hasHit = hits.Any(hit => hit.collider != null);
 
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hasHit && hits[i].collider.TryGetComponent<Web>(out Web web))
+            if (hits[i].collider != null && hits[i].collider.TryGetComponent<Web>(out Web web))
             {
                 if (i < hits.Length / 2)
                     transform.position = hits[i].point - transform.forward;
@@ -76,7 +74,7 @@ public class Cocoon : MonoBehaviour
 
         void EmitRaycasts()
         {
-            int rayDistance = 5;
+            int rayDistance = 10;
 
             Physics.Raycast(transform.position, transform.forward, out hits[0], rayDistance);
             Physics.Raycast(transform.position + transform.up, transform.forward, out hits[1], rayDistance);

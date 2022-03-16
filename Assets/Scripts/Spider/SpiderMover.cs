@@ -32,6 +32,8 @@ public class SpiderMover : MonoBehaviour
             moveButton.PressedEvent += MoveLegFoward;
             moveButton.UnpressedEvent += MoveLegBack;
         }
+
+        _spider.GrowEvent += ImproveSpeed;
     }
 
     private void Update()
@@ -52,6 +54,8 @@ public class SpiderMover : MonoBehaviour
             moveButton.PressedEvent -= MoveLegFoward;
             moveButton.UnpressedEvent -= MoveLegBack;
         }
+
+        _spider.GrowEvent -= ImproveSpeed;
     }
 
     private void MoveLegFoward(string leg)
@@ -79,7 +83,7 @@ public class SpiderMover : MonoBehaviour
     private IEnumerator Rotate(string leg)
     {
         int turningSide = 1;
-        int iterationsCount = 30;
+        int iterationsCount = 20;
 
         if (leg.Contains(_right))
             turningSide = -turningSide;
@@ -100,5 +104,10 @@ public class SpiderMover : MonoBehaviour
             transform.Translate(Vector3.forward * _moveSpeed, Space.Self);
             yield return null;
         }
+    }
+
+    private void ImproveSpeed(float growStep)
+    {
+        _moveSpeed *= growStep;
     }
 }

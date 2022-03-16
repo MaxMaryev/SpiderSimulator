@@ -33,7 +33,7 @@ public class GroundChecker : MonoBehaviour
 
             _points[i] = transform.position + transform.InverseTransformDirection(new Vector3(x, y, z));
 
-            //Debug.DrawRay(_points[i], -transform.up * _rayDistance, Color.red);
+            Debug.DrawRay(_points[i], -transform.up * _rayDistance, Color.red);
             Physics.Raycast(_points[i], -transform.up, out _hits[i], _rayDistance);
         }
     }

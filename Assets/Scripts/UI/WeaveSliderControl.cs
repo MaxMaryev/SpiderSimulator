@@ -18,6 +18,9 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
     private float _previousSliderValue;
     private bool _isWearing;
     private float _deltaMeasuringDelay = 0.2f;
+    private float _soundRepeatDelay = 0.6f;
+    private WaitForSeconds _delayedDeltaMeasuring;
+    private WaitForSeconds _delayedSoundRepeating;
 
     public float Delta { get; private set; }
 
@@ -26,6 +29,8 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
         _particleSystem.Stop();
         _slider = GetComponent<Slider>();
         _audioSource = GetComponent<AudioSource>();
+        _delayedDeltaMeasuring = new WaitForSeconds(_deltaMeasuringDelay);
+        _delayedSoundRepeating = new WaitForSeconds(_soundRepeatDelay);
     }
 
     public void ControlAnimation()
@@ -58,7 +63,7 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
         while (_isWearing)
         {
             _previousSliderValue = _slider.value;
-            yield return new WaitForSeconds(_deltaMeasuringDelay);
+            yield return _delayedDeltaMeasuring;
             Delta = Mathf.Abs(_previousSliderValue - _slider.value);
         }
 
@@ -67,12 +72,10 @@ public class WeaveSliderControl : MonoBehaviour, IBeginDragHandler, IEndDragHand
 
     private IEnumerator PlaySound()
     {
-        float delayBetweenPlays = 0.6f;
-
         while (_isWearing)
         {
             _audioSource.PlayOneShot(_weaveSound);
-            yield return new WaitForSeconds(delayBetweenPlays);
+            yield return _delayedSoundRepeating;
         }
     }
 }

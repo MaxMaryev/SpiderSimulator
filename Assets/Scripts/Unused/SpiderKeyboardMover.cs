@@ -106,7 +106,7 @@ public class SpiderKeyboardMover : MonoBehaviour
     private IEnumerator Rotate(string leg)
     {
         int turningSide = 1;
-        int iterationsCount = 20;
+        int iterationsCount = 30;
 
         if (leg.Contains(_right))
             turningSide = -turningSide;
